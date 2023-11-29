@@ -1,0 +1,29 @@
+
+  
+  .header {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #666;
+    position: sticky;
+    top: 0;
+    position: sticky;
+    background: #fff;
+  }
+  
+  .header ul {
+    list-style-type: none;
+    margin: 0;
+    display: flex;
+  }
+  
+  .header ul li{
+    margin-left: 20px;
+  }
+  
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+  }
+  

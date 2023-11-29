@@ -10,16 +10,21 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [list, setList] = useState([]);
+  const [loading , setLoading]=useState(false)
 
   // const getBlogs = () => {
+    // setLoading(true);
   //   fetch('https://api.slingacademy.com/v1/sample-data/blog-posts')
   //     .then((res) => res.json())
   //     .then((data) => {
   //       console.log(data.blogs);
+  // setLoading(false);
   //     });
   // };
   const getBlogs = async () => {
+    setLoading(true);
     try {
+      
       const response = await fetch(
         "https://api.slingacademy.com/v1/sample-data/blog-posts"
       );
@@ -30,6 +35,7 @@ export default function Home() {
 
       const data = await response.json();
       console.log(data.blogs);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching blogs:", error.message);
     }

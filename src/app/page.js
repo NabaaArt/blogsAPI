@@ -7,32 +7,20 @@ import { Footer } from "../components/footer/footer";
 import { Container } from "../components/container/container";
 import { Card } from "../components/card/card";
 import { useEffect, useState } from "react";
+import { SkeletonCard } from "@/components/skeleton/skeleton";
 
 export default function Home() {
   const [list, setList] = useState([]);
+  const [loding, setLoding] = useState(true);
 
-  // const getBlogs = () => {
-  //   fetch('https://api.slingacademy.com/v1/sample-data/blog-posts')
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data.blogs);
-  //     });
-  // };
-  const getBlogs = async () => {
-    try {
-      const response = await fetch(
-        "https://api.slingacademy.com/v1/sample-data/blog-posts"
-      );
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status} - ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      console.log(data.blogs);
-    } catch (error) {
-      console.error("Error fetching blogs:", error.message);
-    }
+  const getBlogs = () => {
+    setLoding(true);
+    fetch("https://api.slingacademy.com/v1/sample-data/blog-posts")
+      .then((res) => res.json())
+      .then((data) => {
+        setList(data.blogs);
+        setLoding(false);
+      });
   };
 
   useEffect(() => {
@@ -54,9 +42,12 @@ export default function Home() {
       </div>
       <Container>
         <div className={styles.grid}>
-          {list.map((blog, index) => (
-            <Card key={index} blog={blog} />
-          ))}
+          {loding &&
+            [0, 1, 2, 3, 4, 5, 6].map((_, index) => (
+              <SkeletonCard key={index} />
+            ))}
+          {!loding &&
+            list.map((blog, index) => <Card key={index} blog={blog} />)}
         </div>
       </Container>
       <Footer />

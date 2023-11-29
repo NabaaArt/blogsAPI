@@ -1,12 +1,8 @@
-
-  
-  .header {
+  .header{
     padding-top: 16px;
     padding-bottom: 16px;
-    border-bottom: 1px solid #666;
-    position: sticky;
+    border-bottom: 1px solid #666666c1;
     top: 0;
-    position: sticky;
     background: #fff;
   }
   
@@ -14,13 +10,15 @@
     list-style-type: none;
     margin: 0;
     display: flex;
+    gap: 16px;
   }
   
-  .header ul li{
+  .header .content ul li{
     margin-left: 20px;
+  
   }
   
-.content {
+.header .content {
     display: flex;
     justify-content: space-between;
     align-items: center;

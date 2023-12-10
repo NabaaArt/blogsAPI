@@ -8,10 +8,17 @@ import { Container } from "../components/container/container";
 import { Card } from "../components/card/card";
 import { useEffect, useState } from "react";
 import { SkeletonCard } from "@/components/skeleton/skeleton";
+import { StrictMode } from "react";
+import ReactDOM from "react-dom";
+
+import ScrollComponent from "@/hooks/useInfiniteScroll";
 
 export default function Home() {
   const [list, setList] = useState([]);
   const [loding, setLoding] = useState(true);
+  const rootElement = document.getElementById("root");
+
+  //////////////////////////
 
   const getBlogs = () => {
     setLoding(true);
@@ -23,9 +30,11 @@ export default function Home() {
       });
   };
 
-  useEffect(() => {
-    getBlogs();
-  }, []);
+  ////////////////////////////
+
+  // useEffect(() => {
+  //   getBlogs();
+  // }, []);
 
   return (
     <main className={styles.home}>
@@ -41,14 +50,19 @@ export default function Home() {
         </div>
       </div>
       <Container>
-        <div className={styles.grid}>
+        ReactDOM.render(
+        <StrictMode>
+          <ScrollComponent />
+        </StrictMode>
+       );
+        {/* <div className={styles.grid}>
           {loding &&
             [0, 1, 2, 3, 4, 5, 6].map((_, index) => (
               <SkeletonCard key={index} />
             ))}
           {!loding &&
             list.map((blog, index) => <Card key={index} blog={blog} />)}
-        </div>
+        </div> */}
       </Container>
       <Footer />
     </main>
